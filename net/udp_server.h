@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
      char str[INET_ADDRSTRLEN];
      int i, len;
 
-     if(argc < 1){
-         printf("./exe port");
+     if(argc != 2){
+         printf("usage: ./exe port \n");
          return 1;
      }
 
