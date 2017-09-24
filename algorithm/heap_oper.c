@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * 堆排序算法
+ */
 // new node, father node is (i-1)/2
 void MinHeapFixup(int a[], int i){
 	int j, temp;
@@ -62,4 +65,20 @@ void minHeapSort(int a[], int n){
 		swap(a[i], a[0]);
 		MinHeapFixdown(a, 0, i);
 	}
+}
+
+int main(void){
+
+    int a[] = {1, 9, 4, 2, 10, 5};
+    int len = sizeof(a)/sizeof(a[0]);
+
+    minHeapSort(a, len);
+
+    for(int i = 0; i < len; i++){
+       printf("%d ", a[i]); 
+    }
+
+    printf("\n");
+
+    return 0;
 }
