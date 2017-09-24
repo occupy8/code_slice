@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define swap(a, b) do{int c = a; a = b; b = c;}while(0)
+
+
 /**
  * 堆排序算法
  */
@@ -25,7 +28,7 @@ void MinHeapFixup(int a[], int i){
 //insert num
 void MinHeapAddNumber(int a[], int n, int nNum){
 	a[n] = nNum;
-	minHeapFixup(a, n);
+	MinHeapFixup(a, n);
 }
 
 //from i, n:total of num, from 0 to i
@@ -72,6 +75,7 @@ int main(void){
     int a[] = {1, 9, 4, 2, 10, 5};
     int len = sizeof(a)/sizeof(a[0]);
 
+    MakeMinHeap(a, len);
     minHeapSort(a, len);
 
     for(int i = 0; i < len; i++){
