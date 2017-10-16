@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #define MAXLINE 1024 
-#define SERV_PORT 1234
+#define SERV_PORT 8862 
 
 void do_cli(int sockfd, struct sockaddr *pservaddr, socklen_t servlen)
 {
@@ -20,18 +20,18 @@ void do_cli(int sockfd, struct sockaddr *pservaddr, socklen_t servlen)
 		exit(1);
 	}
 	strcpy(sendline, "hello world!");
-	write(sockfd, sendline, strlen(sendline));
-	sleep(1);
 
 	while(1)
 	{
 		write(sockfd, sendline, strlen(sendline));
+        
 		n = read(sockfd, recvline, MAXLINE);
 		if(n == -1)
 		{
 			perror("read error");
 			exit(1);
 		}
+        recvline[n] = '\0';
 
 		printf("%s\n", recvline);
 		sleep(5);
