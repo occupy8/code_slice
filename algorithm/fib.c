@@ -21,7 +21,7 @@ int Fib(int n)
 }
 
 int main(void){
-    int num = 5;
+    int num = 3;
 
     int max = Fib(num);
 

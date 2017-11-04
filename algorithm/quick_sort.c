@@ -32,31 +32,31 @@ void quick_sort(int a[], int l, int r)
 int quick_sort2(int a[], int l, int r){
     int i, j, temp;
 
-    if(l < r){
-        i = l;
-        j = r;
-        temp = a[i];
-        while(i < j){
-            while(i < j && a[j] >= temp)
-                j--;
-            if(i < j)
-                a[i++] = a[j];
-            while(i < j && a[i] <= temp)
-                i++;
-            if(i < j)
-                a[j--] = a[i];
-        } 
+    i = l;
+    j = r;
+    temp = a[i];
+    while(i < j){
+        while(i < j && a[j] >= temp)
+            j--;
+        if(i < j)
+            a[i++] = a[j];
+        while(i < j && a[i] <= temp)
+            i++;
+        if(i < j)
+            a[j--] = a[i];
+    } 
 
-        a[i] = temp;
+    a[i] = temp;
 
-        return i;
-    }
-
-    return -1;
+    return i;
 }
 
 int quick_unrecursion(int a[], int len){
-    int stack[128] = {0,};
+
+    if(a == NULL || len <= 0)
+        return -1;
+
+    int stack[1024] = {0,};
     int top = -1;
     int mid;
     int i;

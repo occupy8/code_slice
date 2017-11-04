@@ -8,6 +8,7 @@
  * 堆排序算法
  */
 // new node, father node is (i-1)/2
+// i from 0 begin
 void MinHeapFixup(int a[], int i){
 	int j, temp;
 	
@@ -35,7 +36,7 @@ void MinHeapAddNumber(int a[], int n, int nNum){
 void MinHeapFixdown(int a[], int i, int n){
 	int j, temp;
 	temp = a[i];
-	j = 2*i+1;
+	j = 2*i+1;    //左子节点
 
 	while(j < n){
 		if(j+1 < n && a[j+1] < a[j])
@@ -54,7 +55,7 @@ void MinHeapFixdown(int a[], int i, int n){
 //del num
 void MinHeapDeleteNumber(int a[], int n){
 	swap(a[0], a[n-1]);
-	MinHeapFixdown(a, 0, n-1);
+	MinHeapFixdown(a, 0, n);
 }
 
 //create min heap
