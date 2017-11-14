@@ -6,10 +6,12 @@
 
 #include <iostream>
 #include <stack>
+#include <vector>
+#include <stdlib.h>
 
 using namespace std;
 
-struct tree_node{
+typedef struct tree_node{
     int val;
     struct tree_node *left;
     struct tree_node *right;
@@ -44,6 +46,46 @@ void all_path(tree_node *root, vector<int> &v, int &cur_sum, int expect_sum){
        all_path(root->right, v, cur_sum, expect_sum); 
 }
 
+void all_path_norecur(tree_node *root, vector<int> &v, int expect_sum){
+	stack<tree_node *> s;
+	tree_node *p = root;
+	int cur_num = 0; //保存当前路径上的和
+
+	while(p != NULL || !s.empty()){
+		
+		while(p != NULL){
+			s.push(p);
+			v.push_back(p->val);
+			cur_num += p->val;
+
+			p = p->left;
+		}
+
+		if(!s.empty()){
+			p = s.top(); //是否叶子节点
+
+			if(p->left == NULL && p->right == NULL && cur_num == expect_sum)
+			{
+				int i;
+
+				cout<<"sum is "<<expect_sum<<":"<<endl;
+				for(i = 0; i < v.size(); i++){
+					cout<<v[i]<<" ";
+				}
+
+				cout<<endl;
+			}
+
+			s.pop();
+
+			cur_num -= v[v.size()-1];
+			v.pop_back();
+
+			p = p->right;
+		}
+	}
+}
+
 //非递归前序遍历
 void pre_order(struct tree_node *root){
     stack<struct tree_node *> s;
@@ -63,16 +105,18 @@ void pre_order(struct tree_node *root){
             p = p->right;
         }
     }
+
+    cout<<endl;
 }
 
 int main(void){
-    struct tree_node *root = calloc(sizeof(struct tree_node), 1);
+    tree_node *root = (tree_node *)calloc(sizeof(tree_node), 1);
     root->val = 1;
-    struct tree_node *left = calloc(sizeof(struct tree_node), 1);
+    tree_node *left = (tree_node *)calloc(sizeof(tree_node), 1);
     left->val = 2;
-    struct tree_node *right = calloc(sizeof(struct tree_node), 1);
+    tree_node *right = (tree_node *)calloc(sizeof(tree_node), 1);
     right->val = 3;
-    struct tree_node *leaf = calloc(sizeof(struct tree_node), 1);
+    tree_node *leaf = (tree_node *)calloc(sizeof(tree_node), 1);
     leaf->val = 4;
 
     root->left = left;
@@ -80,4 +124,8 @@ int main(void){
     left->left = leaf;
 
     pre_order(root);
+    vector<int > v;
+    all_path_norecur(root, v, 7);
+    all_path_norecur(root, v, 3);
+    all_path_norecur(root, v, 4);
 }
