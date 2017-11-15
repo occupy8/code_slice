@@ -26,22 +26,19 @@ void inorder_nonrecursive(tree_node *root, vector<int> &v){
     stack<tree_node *> s;
     tree_node *p = root;
 
-    s.push(p);
-    while(!s.empty()){
-        //一路向左
-        p = s.top();
-        while(p->left){
-            s.push(p->left);
-            p = p->left;
-        }
-        //中间节点
-        v.push_back(p->val);
-        s.pop();
-        //一路向右
-        while(p->right){
-            s.push(p->right);
-            p = p->right;
-        }
+    while(!s.empty() || p){
+	while(p){
+		s.push(p);
+		p = p->left;
+	}
+
+	if(!s.empty()){
+		p = s.top();
+		s.pop();
+		v.push_back(p->val);
+
+		p = p->right;
+	}
     }
 }
 
@@ -57,7 +54,7 @@ int main(void){
     root->right->right = new tree_node;
     root->right->right->val = 4;
 
-    vector<int> &v;
+    vector<int> v;
     inorder_nonrecursive(root, v);
 
     int i;
