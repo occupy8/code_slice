@@ -15,7 +15,8 @@ struct node{
 };
 
 enum Tag{
-    goLeft,
+    goNULL,
+    goLeft = 1,
     goRight,
     goBack
 };
@@ -39,19 +40,19 @@ void print_one_path(node *root, vector<node *> &vec_node, node *target){
       }
 
       node *cur_node = NULL;
-      Tag *cur_tag = NULL;
-      vector<Tag *> vec_tag;
+      Tag cur_tag = goNULL;
+      vector<Tag > vec_tag;
 
       vec_node.push_back(root);  
       vec_tag.push_back(goLeft);
 
-      while(!v.empty()){
+      while(!vec_node.empty()){
         cur_tag = vec_tag.back();
         cur_node = vec_node.back(); 
         if(cur_node == target)
             return;
 
-        switch(*cur_tag){
+        switch(cur_tag){
             case goLeft:
                 vec_tag.pop_back();
                 vec_tag.push_back(goRight);
@@ -97,6 +98,14 @@ int main(void){
     vector<node *> result;
 
     print_one_path(root, result, root->right->right); 
+    print_path(result); 
+
+    result.clear();
+    print_one_path(root, result, root->right); 
+    print_path(result); 
+
+    result.clear();
+    print_one_path(root, result, root->left); 
     print_path(result); 
 
     return 0;
