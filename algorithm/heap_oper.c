@@ -59,6 +59,7 @@ void MinHeapDeleteNumber(int a[], int n){
 }
 
 //create min heap
+//n:total of num
 void MakeMinHeap(int a[], int n){
 	for(int i = n/2-1; i>= 0; i--)
 		MinHeapFixdown(a, i, n);
