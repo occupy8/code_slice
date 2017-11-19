@@ -1,7 +1,6 @@
 /*
  * 在一个排好顺序的数组中，查找一个数字出现的次数
  */
-
 #include <iostream>
 #include <string.h>
 
@@ -69,6 +68,9 @@ int find_firstK(int arr[], int l, int r, int t){
             return mid;
         }
     }
+    if(i == j && arr[i] == t){
+	return i;
+    }
 
     if(i < j){
         return mid;
@@ -78,7 +80,7 @@ int find_firstK(int arr[], int l, int r, int t){
 }
 
 int main(void){
-    int arr[] = {2, 4, 3, 3, 3, 8, 9, 0};
+    int arr[] = {2, 2, 3, 3, 3, 8, 9, 0};
     int len = sizeof(arr)/sizeof(int);
 
     int num = find(arr, 0, len-1, 3); 
