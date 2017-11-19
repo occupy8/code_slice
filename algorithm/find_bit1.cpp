@@ -1,10 +1,13 @@
 /*
  * 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O（n）,空间复杂度是O（1） 
  */
+#include <iostream>
+
+using namespace std;
 
 //check the position of num is 1 ??
 bool check_bit(int num, int position){
-    if(num >> position & 0x01){
+    if((num >> position) & 0x01){
         return true;
     }
 
@@ -40,6 +43,9 @@ int find_nums(int arr[], int len, int *num1, int *num2){
     if(where == -1){
         return -1;
     }
+
+    *num1 = 0;
+    *num2 = 0;
 
     for(i = 0; i < len; i++){
         if(check_bit(arr[i], where)){
